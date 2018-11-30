@@ -3,6 +3,7 @@ Purpose of this project is to produce a system that creates 3D videos using norm
 This is achieved by using certain camera tricks and giving the illusion of having stereo camera setup by exploiting the parallax effect. 
 
 Implementation's steps (3 sprints): 
+
 First Sprint:
 - Take in two images that are some distance apart and create a depth map of the scene
 - Recognize which direction the camera is moving based on a video
