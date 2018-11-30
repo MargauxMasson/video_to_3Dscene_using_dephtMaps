@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from prompt_toolkit import prompt
 from prompt_toolkit.shortcuts import confirm
-# from prompt_toolkit import print_formatted_text
+from prompt_toolkit import print_formatted_text
 from Integration.helpers.file_system_helpers import check_file_exists, check_dir_write_access
 
 def _get_user_confirmation(question, default=False):
@@ -12,7 +12,7 @@ def _get_user_confirmation(question, default=False):
     default: bool - consider this value as a default if user does not provide an answer
     '''
     suffix = "[Y/n]" if default is True else "[y/N]"
-    answer = confirm(question) or default
+    answer = confirm(question, suffix) or default
     return answer
 
 def _get_user_input(text, default=None):
@@ -43,7 +43,7 @@ def get_input_video_name():
         if not input_video:
             continue
         if not check_file_exists(input_video):
-            print("File %s doesn't exist or not available for reading. Please try again." % input_video)
+            print_formatted_text("File %s doesn't exist or not available for reading. Please try again." % input_video)
             input_video = None
     # TODO check file is a video
     return input_video
@@ -58,7 +58,7 @@ def get_output_video_name():
         if not output_video:
             continue
         if not check_dir_write_access(output_video):
-            print("Cannot write to directory. Please try again.")
+            print_formatted_text("Cannot write to directory. Please try again.")
             output_video = None
             continue
 
@@ -86,11 +86,11 @@ def get_step_value():
         try:
             step = int(step)
         except:
-            print("Please enter an integer value")
+            print_formatted_text("Please enter an integer value")
             step = None
             continue
         if step <= 0:
-            print("Step should be greater than 0")
+            print_formatted_text("Step should be greater than 0")
             step = None
     return step
 
@@ -100,6 +100,13 @@ def get_fast_depthmap_option():
     '''
     fast = _get_user_confirmation("Use fast version of depth map creator? (may decrease quality)")
     return fast
+
+def get_nn_depthmap_option():
+    '''
+    TODO
+    '''
+    nn = _get_user_confirmation("Use a neural network to generate depthmap?")
+    return nn
 
 def get_command():
     command = None

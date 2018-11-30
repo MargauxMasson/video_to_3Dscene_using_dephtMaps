@@ -25,45 +25,57 @@ def main():
 
 def save_depthmap_video():
     input_video = get_input_video_name()#**prompt_settings)
-    print("Video to process: %s" % input_video)
+    print_formatted_text("Video to process: %s" % input_video)
 
     output_video = get_output_video_name()#**prompt_settings)
-    print("Output will be saved: %s" % output_video)
-
-    low = get_low_quality_option()
-    if low:
-        print("Low quality enabled")
+    print_formatted_text("Output will be saved: %s" % output_video)
 
     step = get_step_value()
-    print("Step is: %s" % step)
+    print_formatted_text("Step is: %s" % step)
 
-    fast = get_fast_depthmap_option()
-    if fast:
-        print("Fast depth map enabled")
+    low = False
+    fast = False
+    nn = get_nn_depthmap_option()
+    if nn:
+        print_formatted_text("Neural network depth map enabled")
+    else:
+        fast = get_fast_depthmap_option()
+        if fast:
+            print_formatted_text("Fast depth map enabled")
+
+        low = get_low_quality_option()
+        if low:
+            print_formatted_text("Low quality enabled")
 
     try:
-        converter = VideoConverter(input_video, low, step, fast)
+        converter = VideoConverter(input_video, low, step, fast, nn)
         converter.convert_video(output_video)
     except ValueError as err:
         print("===============> Error: ", err)
 
 def show_executable():
     input_video = get_input_video_name()#**prompt_settings)
-    print("Video to process: %s" % input_video)
+    print_formatted_text("Video to process: %s" % input_video)
 
-    low = get_low_quality_option()
-    if low:
-        print("Low quality enabled")
+    low = False
+    fast = False
+    nn = get_nn_depthmap_option()
+    if nn:
+        print_formatted_text("Neural network depth map enabled")
+    else:
+        fast = get_fast_depthmap_option()
+        if fast:
+            print_formatted_text("Fast depth map enabled")
+
+        low = get_low_quality_option()
+        if low:
+            print_formatted_text("Low quality enabled")
 
     step = get_step_value()
-    print("Step is: %s" % step)
-
-    fast = get_fast_depthmap_option()
-    if fast:
-        print("Fast depth map enabled")
+    print_formatted_text("Step is: %s" % step)
 
     try:
-        run_opengl(input_video, low, step, fast)
+        run_opengl(input_video, low, step, fast, nn)
     except ValueError as err:
         print("===============> Error: ", err)
 
