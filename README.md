@@ -44,6 +44,31 @@ If you want to try out the examples, run:
 To run tests please use the following command:
 `PYTHONPATH=. pytest -v`
 
+## Use a conda environment - Some useful command lines
+
+Download conda
+
+Then: 
+
+`export PATH=~/anaconda3/bin:$PATH`
+
+`conda create -n myworkshop python=3.6 ipykernel jupyter anaconda`
+
+`source activate myworkshop`
+
+`ipython kernel install --name myworkshop --user`
+
+`python3 -m pip install --upgrade pip`
+
+`python3 -m pip install --upgrade prompt_toolkit`
+
+`pip install opencv-python`
+
+`conda install pytorch torchvision -c pytorch`
+
+`conda install pyopengl`
+
+`pip install pygame`
 
 
 Team members: Behnam Saeedi, Margaux Masson, Kamilla Aslami, Nghi Duong, Dhruv Jawalkar
